@@ -2,26 +2,33 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-//        generating random numbers
-        Random rand  = new Random();
-        int comp = (rand.nextInt(3) + 1);
-        System.out.println();
         System.out.println("Welcome to the rock, paper, scissor game!!");
 
+        do {
+            //        generating random numbers
+            Random rand  = new Random();
 
-        String computerChoice = compChoice(comp);
-        String usersChoice = userChoice();
+            String computerChoice = compChoice(rand.nextInt(3) + 1);
+            String usersChoice = userChoice();
+                if(usersChoice.equals("1")){
+                    System.out.println("thank you for playing this game");
+                    return;
+                }
 
-        System.out.println("Your Computer Chooses " + computerChoice);
-        System.out.println();
-        System.out.println("But You Chose " + usersChoice);
-        System.out.println();
-        String answer = judgement(computerChoice, usersChoice);
-        if (answer.equals("equal") || answer.equals("-1")){
-            System.out.println("fair judgement, please play game again");
-        }else if(answer.equals("A won")){
-            System.out.println(answer);
-        }
+            System.out.println("You selected " + usersChoice);
+            System.out.println();
+            System.out.println("And your Computer also selected " + computerChoice);
+            System.out.println();
+            String answer = judgement(computerChoice, usersChoice);
+            if (answer.equals("equal") || answer.equals("-1")){
+                System.out.println("fair judgement, please play game again");
+            }else{
+                System.out.println(answer);
+            }
+            System.out.println();
+        }while (true);
+
+
 
 
 
@@ -44,12 +51,13 @@ public class Main {
 
     public static String userChoice(){
        Scanner in = new Scanner(System.in);
-        System.out.println("Please input your choice of either \"rock\", \"paper\" or \"scissors\" (note!! all in smaller cases)");
+        System.out.println("Please input your choice of either \"rock\", \"paper\" or \"scissors\" (note!! all in smaller cases) input \"x\" to end game" );
         return in.next();
     }
+
     public static String judgement(String comp, String user){
         if(comp.equals(user)){
-            return "equal";
+            return "-1";
         }else if(comp.equals("rock") && user.equals("scissors")){
             return "Computer won";
         }else if (comp.equals("scissors") && user.equals("paper") ){
@@ -62,8 +70,8 @@ public class Main {
             return "you won";
         }else if(comp.equals("rock") && user.equals("paper")){
             return "you won";
-        }else {
-            return "-1";
+        }else{
+            return "incorrect choices made";
         }
     }
 
